@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Players - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <h1>Elite Players</h1>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html">Tournaments</a></li> <!-- Links back to home for now -->
+                    <li><a href="#teams">Teams</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <h2>Elite Players</h2>
+            <p>“Home of the best online football tournaments.”</p>
+            <button onclick="window.location.href='create.html'">Create Tournament</button>
+        </section>
+
+        <section id="current-tournaments" class="tournaments-section">
+            <h3>Current Tournaments</h3>
+            <div id="tournament-list"></div> <!-- Dynamically populated by JS -->
+        </section>
+
+        <section id="teams" class="teams-section">
+            <h3>Teams</h3>
+            <div class="teams-grid">
+                <div class="team-card">Real Madrid (Spain)</div>
+                <div class="team-card">Germany</div>
+                <div class="team-card">Spain</div>
+                <div class="team-card">France</div>
+                <div class="team-card">Netherlands</div>
+                <div class="team-card">Portugal</div>
+                <div class="team-card">Morocco</div>
+                <div class="team-card">Algeria</div>
+                <div class="team-card">Japan</div>
+                <div class="team-card">Senegal</div>
+                <div class="team-card">Tunisia</div>
+                <div class="team-card">Argentina</div>
+                <div class="team-card">Uruguay</div>
+                <div class="team-card">Colombia</div>
+                <div class="team-card">Italy</div>
+                <div class="team-card">Brazil</div>
+                <div class="team-card">Belgium</div>
+                <div class="team-card">Croatia</div>
+                <div class="team-card">England</div>
+                <div class="team-card">Wales</div>
+                <div class="team-card">Mexico</div>
+                <div class="team-card">Switzerland</div>
+                <div class="team-card">Ghana</div>
+                <div class="team-card">Nigeria</div>
+                <div class="team-card">United States</div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
