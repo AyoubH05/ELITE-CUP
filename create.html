@@ -1,59 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elite Players - Create Tournament</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Elite Players - Create Tournament</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#0E0F13"/>
+  <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="nav-container">
-                <h1>Elite Players</h1>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="index.html">Tournaments</a></li>
-                    <li><a href="index.html#teams">Teams</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <main>
-        <section class="create-section">
-            <h2>Create a New Tournament</h2>
-            <form id="tournament-form">
-                <label for="name">Tournament Name:</label>
-                <input type="text" id="name" required>
-                
-                <label for="format">Format:</label>
-                <select id="format" required>
-                    <option value="League (Home & Away)">League (Home & Away)</option>
-                    <option value="Knockout">Knockout</option>
-                    <option value="Group + Knockout">Group + Knockout</option>
-                </select>
-                
-                <label for="numberOfTeams">Number of Teams:</label>
-                <select id="numberOfTeams" required>
-                    <option value="8">8</option>
-                    <option value="16">16</option>
-                    <option value="24">24</option>
-                    <option value="32">32</option>
-                </select>
-                
-                <label for="status">Status:</label>
-                <select id="status" required>
-                    <option value="Upcoming">Upcoming</option>
-                    <option value="Ongoing">Ongoing</option>
-                    <option value="Finished">Finished</option>
-                </select>
-                
-                <button type="submit">Save Tournament</button>
-            </form>
-        </section>
-    </main>
+  <header>
+    <nav class="nav">
+      <div class="nav-container">
+        <h1 class="brand">Elite Players</h1>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#current-tournaments">Tournaments</a></li>
+          <li><a href="teams.html">Teams</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
 
-    <script src="script.js"></script>
+  <main class="container">
+    <section class="create-section card">
+      <h2>Create a New Tournament</h2>
+      <form id="tournament-form" class="form">
+        <div class="field">
+          <label for="name">Tournament Name</label>
+          <input type="text" id="name" placeholder="e.g. Summer Cup 2025" required />
+        </div>
+
+        <div class="field">
+          <label for="format">Format</label>
+          <select id="format" required>
+            <option value="League (Home & Away)">League (Home & Away)</option>
+            <option value="Knockout">Knockout</option>
+            <option value="Group + Knockout">Group + Knockout</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="numberOfTeams">Number of Teams</label>
+          <select id="numberOfTeams" required>
+            <option value="8">8</option>
+            <option value="16">16</option>
+            <option value="24">24</option>
+            <option value="32">32</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="status">Status</label>
+          <select id="status" required>
+            <option value="Upcoming">Upcoming</option>
+            <option value="Ongoing">Ongoing</option>
+            <option value="Finished">Finished</option>
+          </select>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn btn-primary">Save Tournament</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
