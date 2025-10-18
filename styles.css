@@ -63,7 +63,7 @@ h3{ font-size:clamp(18px, 1.6vw, 22px); }
 }
 .nav-links{ list-style:none; display:flex; gap:14px; margin:0; padding:0; align-items:center; }
 .nav a{
-  color:var(--text); text-decoration:none; font-weight:500; opacity:.9;
+  color:var(--text); text-decoration:none; font-weight:600; opacity:.9;
   padding:8px 10px; border-radius:10px; transition:.18s ease;
 }
 .nav a:hover{ background-color:#1b1e28; color:var(--pink-400); }
@@ -72,7 +72,7 @@ h3{ font-size:clamp(18px, 1.6vw, 22px); }
 /* Buttons */
 .btn{
   display:inline-flex; align-items:center; justify-content:center;
-  font:inherit; font-weight:600; cursor:pointer;
+  font:inherit; font-weight:700; cursor:pointer;
   border-radius:12px; border:1px solid transparent;
   padding:10px 14px; transition:.18s ease;
   color:var(--text); background:transparent;
@@ -100,7 +100,7 @@ h3{ font-size:clamp(18px, 1.6vw, 22px); }
 .card-cta{
   display:block; max-width:520px; margin:16px auto 0; padding:18px 20px;
   border-radius:16px; border:1px solid var(--border);
-  background:var(--surface); color:var(--text); font-weight:700;
+  background:var(--surface); color:var(--text); font-weight:800;
   transition:.2s ease; text-decoration:none;
 }
 .card-cta:hover{
@@ -133,7 +133,7 @@ h3{ font-size:clamp(18px, 1.6vw, 22px); }
   border-color:var(--pink-400);
   box-shadow:var(--shadow-2);
 }
-.tournament-card h4{ margin:0 0 8px; font-size:18px; font-weight:800; }
+.tournament-card h4{ margin:0 0 8px; font-size:18px; font-weight:900; }
 .tournament-card .meta{ color:var(--muted); margin:2px 0; }
 .card-head{ display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:6px; }
 
@@ -142,10 +142,10 @@ h3{ font-size:clamp(18px, 1.6vw, 22px); }
   color:var(--pink-400);
   border:1px solid var(--pink-700);
   padding:2px 8px; border-radius:999px; font-size:12px; white-space:nowrap;
-  font-weight:700;
+  font-weight:800;
 }
 
-/* Teams — striped/solid and readable text */
+/* Teams — base (used in teams page by default) */
 .teams-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit, minmax(180px,1fr));
@@ -163,23 +163,22 @@ h3{ font-size:clamp(18px, 1.6vw, 22px); }
 
 .team-card .team-name{
   font-weight:900; font-size:16px; letter-spacing:.2px;
-  text-shadow: 0 1px 2px rgba(0,0,0,.35);
-  -webkit-font-smoothing:antialiased;
+  text-shadow: 0 1px 2px rgba(0,0,0,.35), 0 0 1px rgba(0,0,0,.25);
 }
 .country.badge{
   background:rgba(248,107,151,.18); color:var(--pink-400);
   border:1px solid var(--pink-700); padding:2px 8px;
-  border-radius:999px; font-size:12px; white-space:nowrap; font-weight:700;
+  border-radius:999px; font-size:12px; white-space:nowrap; font-weight:800;
 }
 
-/* solid: لون واحد — striped: خطوط قطريّة */
+/* solid: لون واحد — striped: خطوط */
 .team-card.solid{ background-color: var(--c1, var(--surface-2)); }
 .team-card.striped{
   background:
     repeating-linear-gradient(
       135deg,
-      color-mix(in srgb, var(--c1, #1B1E28) 88%, transparent) 0 12px,
-      color-mix(in srgb, var(--c2, #151720) 88%, transparent) 12px 24px
+      var(--c1, #1B1E28) 0 12px,
+      var(--c2, #151720) 12px 24px
     );
 }
 .team-card::after{
@@ -191,7 +190,7 @@ h3{ font-size:clamp(18px, 1.6vw, 22px); }
 /* Forms */
 .form{ margin-top:8px; }
 .field{ margin-bottom:16px; text-align:left; }
-label{ display:block; margin-bottom:6px; color:var(--muted); font-weight:600; }
+label{ display:block; margin-bottom:6px; color:var(--muted); font-weight:700; }
 input[type="text"], select{
   width:100%; height:44px; padding:10px 14px;
   color:var(--text); background:var(--surface-2);
@@ -209,7 +208,7 @@ input:focus, select:focus{ border-color:var(--accent); box-shadow:0 0 0 3px var(
   background:var(--surface-2); border:1px solid var(--border);
   border-radius:12px; padding:10px 12px;
 }
-.match-card .teams{ display:flex; align-items:center; gap:8px; font-weight:700; }
+.match-card .teams{ display:flex; align-items:center; gap:8px; font-weight:800; }
 .match-card .vs{ color:var(--muted); }
 .score-inputs{ display:flex; align-items:center; gap:8px; }
 .score-inputs input{
@@ -217,7 +216,7 @@ input:focus, select:focus{ border-color:var(--accent); box-shadow:0 0 0 3px var(
   color:var(--text); background:var(--surface);
   border:1px solid var(--border); border-radius:10px;
 }
-.final-score{ display:flex; align-items:center; gap:8px; font-weight:800; }
+.final-score{ display:flex; align-items:center; gap:8px; font-weight:900; }
 
 /* Standings */
 .table-wrap{ overflow:auto; }
@@ -230,7 +229,7 @@ input:focus, select:focus{ border-color:var(--accent); box-shadow:0 0 0 3px var(
 
 /* Bracket */
 .bracket{ display:grid; gap:12px; grid-auto-flow:column; grid-auto-columns:1fr; overflow:auto; padding-bottom:4px; }
-.bracket-round .round-title{ font-weight:800; margin:6px 0 8px; }
+.bracket-round .round-title{ font-weight:900; margin:6px 0 8px; }
 .bracket .match-card{ min-width:260px; }
 
 /* Empty state */
@@ -243,4 +242,81 @@ input:focus, select:focus{ border-color:var(--accent); box-shadow:0 0 0 3px var(
 @media (max-width: 768px){
   .nav-links{ gap:10px; flex-wrap:wrap; }
   .container{ margin:24px auto; }
+}
+
+/* =========================================
+   Tournament page — Team cards enhancements
+   ========================================= */
+#tournament-info .teams-grid { gap: 14px; }
+
+#tournament-info .team-card{
+  /* الشكل المطلوب */
+  border-radius: 12px; /* 10–12px */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  min-height: 96px;
+
+  /* تمركز المحتوى */
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:6px; text-align:center;
+
+  /* وضوح الكتابة */
+  color:#fff !important;
+  text-shadow: 0 0 4px rgba(0,0,0,0.8);
+
+  /* أنيميشن هوفر */
+  transform-origin:center;
+  will-change:transform, box-shadow;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color .2s ease;
+}
+#tournament-info .team-card:hover{
+  transform: scale(1.05);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.45);
+  border-color: var(--pink-400);
+}
+
+/* تكبير النص ~20% */
+#tournament-info .team-card .team-name{
+  font-weight:900;
+  font-size: clamp(19px, 1.25rem, 22px);
+  letter-spacing:.2px;
+  line-height:1.15;
+  max-width: 95%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#tournament-info .team-card .country{
+  font-weight:800;
+  font-size: 14px; /* ~20% أكبر من 12px */
+  max-width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* خطوط مائلة أعرض (~10px) وتباين أقل */
+#tournament-info .team-card.striped{
+  --stripe1: color-mix(in srgb, var(--c1, #1B1E28) 80%, var(--surface) 20%);
+  --stripe2: color-mix(in srgb, var(--c2, #151720) 80%, var(--surface) 20%);
+  background:
+    repeating-linear-gradient(
+      135deg,
+      var(--stripe1) 0 10px,
+      var(--stripe2) 10px 20px
+    );
+}
+#tournament-info .team-card.striped::after{
+  content:""; position:absolute; inset:0; border-radius:inherit;
+  background: linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,.18));
+  pointer-events:none;
+}
+
+/* نسخة اللون الواحد */
+#tournament-info .team-card.solid{
+  background-color: var(--c1, var(--surface-2));
+}
+#tournament-info .team-card.solid::after{
+  content:""; position:absolute; inset:0; border-radius:inherit;
+  background: linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.14));
+  pointer-events:none;
 }
