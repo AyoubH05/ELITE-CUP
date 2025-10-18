@@ -145,7 +145,7 @@ h3{ font-size:clamp(18px, 1.6vw, 22px); }
   font-weight:800;
 }
 
-/* Teams — base (used in teams page by default) */
+/* Teams — base (for teams page) */
 .teams-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit, minmax(180px,1fr));
@@ -160,7 +160,6 @@ h3{ font-size:clamp(18px, 1.6vw, 22px); }
   display:flex; align-items:center; justify-content:space-between; gap:10px;
 }
 .team-card:hover{ border-color:var(--pink-400); box-shadow:var(--shadow-2); transform:translateY(-1px); }
-
 .team-card .team-name{
   font-weight:900; font-size:16px; letter-spacing:.2px;
   text-shadow: 0 1px 2px rgba(0,0,0,.35), 0 0 1px rgba(0,0,0,.25);
@@ -171,7 +170,7 @@ h3{ font-size:clamp(18px, 1.6vw, 22px); }
   border-radius:999px; font-size:12px; white-space:nowrap; font-weight:800;
 }
 
-/* solid: لون واحد — striped: خطوط */
+/* solid vs striped */
 .team-card.solid{ background-color: var(--c1, var(--surface-2)); }
 .team-card.striped{
   background:
@@ -245,25 +244,18 @@ input:focus, select:focus{ border-color:var(--accent); box-shadow:0 0 0 3px var(
 }
 
 /* =========================================
-   Tournament page — Team cards enhancements
+   Tournament page — Team cards readability
    ========================================= */
 #tournament-info .teams-grid { gap: 14px; }
 
 #tournament-info .team-card{
-  /* الشكل المطلوب */
-  border-radius: 12px; /* 10–12px */
+  border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.4);
   min-height: 96px;
 
-  /* تمركز المحتوى */
   display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:6px; text-align:center;
+  gap:8px; text-align:center;
 
-  /* وضوح الكتابة */
-  color:#fff !important;
-  text-shadow: 0 0 4px rgba(0,0,0,0.8);
-
-  /* أنيميشن هوفر */
   transform-origin:center;
   will-change:transform, box-shadow;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color .2s ease;
@@ -274,27 +266,31 @@ input:focus, select:focus{ border-color:var(--accent); box-shadow:0 0 0 3px var(
   border-color: var(--pink-400);
 }
 
-/* تكبير النص ~20% */
-#tournament-info .team-card .team-name{
-  font-weight:900;
-  font-size: clamp(19px, 1.25rem, 22px);
-  letter-spacing:.2px;
-  line-height:1.15;
-  max-width: 95%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+/* Canva-style label: white text inside black translucent pill */
+#tournament-info .team-card .team-name,
 #tournament-info .team-card .country{
-  font-weight:800;
-  font-size: 14px; /* ~20% أكبر من 12px */
-  max-width: 90%;
+  color:#fff !important;
+  background-color: rgba(0,0,0,0.7);
+  border-radius:8px;
+  padding:4px 10px;
+  display:inline-block;
+  text-align:center;
+  font-weight:900;
+  text-shadow: 0 0 3px rgba(0,0,0,0.6);
+  max-width: 92%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* خطوط مائلة أعرض (~10px) وتباين أقل */
+/* sizes (~+20%) */
+#tournament-info .team-card .team-name{ font-size: clamp(19px, 1.25rem, 22px); }
+#tournament-info .team-card .country{
+  font-size: 14px;
+  font-weight:800;
+}
+
+/* striped background with wider stripes and lower contrast */
 #tournament-info .team-card.striped{
   --stripe1: color-mix(in srgb, var(--c1, #1B1E28) 80%, var(--surface) 20%);
   --stripe2: color-mix(in srgb, var(--c2, #151720) 80%, var(--surface) 20%);
@@ -311,7 +307,7 @@ input:focus, select:focus{ border-color:var(--accent); box-shadow:0 0 0 3px var(
   pointer-events:none;
 }
 
-/* نسخة اللون الواحد */
+/* solid version */
 #tournament-info .team-card.solid{
   background-color: var(--c1, var(--surface-2));
 }
@@ -319,4 +315,11 @@ input:focus, select:focus{ border-color:var(--accent); box-shadow:0 0 0 3px var(
   content:""; position:absolute; inset:0; border-radius:inherit;
   background: linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.14));
   pointer-events:none;
+}
+
+/* override pink badge style inside tournament page */
+#tournament-info .team-card .country.badge{
+  background-color: rgba(0,0,0,0.7) !important;
+  color:#fff !important;
+  border:none !important;
 }
