@@ -232,12 +232,34 @@ function createTournamentData({ name, format, numberOfTeams, status }){
   return { ...base, structure:{ type:'groups', groups:generateGroups(teams) } };
 }
 
+// Migration: لو البطولة قديمة بلا structure/teams نكمّلوها تلقائياً
+function migrateTournamentIfNeeded(t){
+  let changed = false;
+  if(!t.teams || !Array.isArray(t.teams) || t.teams.length === 0){
+    t.teams = sampleN(TEAMS, parseInt(t.numberOfTeams,10) || 8);
+    changed = true;
+  }
+  if(!t.structure){
+    if(t.format==='Knockout'){
+      t.structure = { type:'knockout', knockout:generateKnockout(t.teams) };
+      autopropagateByes(t);
+    } else if(t.format==='League (Home & Away)'){
+      t.structure = { type:'league', league:{ rounds:generateLeague(t.teams, true) } };
+    } else {
+      t.structure = { type:'groups', groups:generateGroups(t.teams) };
+    }
+    changed = true;
+  }
+  return changed;
+}
+
 // Rendering helpers
 function teamChip(t){
   const [c1,c2,c3]=(t.colors||[]).concat(['','','']).slice(0,3);
   const text=contrastColor(c1||'#1B1E28');
   const style=`--c1:${c1||'#1B1E28'};--c2:${c2||'#151720'};--c3:${c3||'transparent'};--teamText:${text};`;
-  return `<div class="team-card" style="${style}">
+  const cls = (t.colors && t.colors.length >= 2) ? 'team-card striped' : 'team-card solid';
+  return `<div class="${cls}" style="${style}">
     <span class="team-name">${t.name}</span>
     ${t.country ? `<span class="country badge">${t.country}</span>` : ''}
   </div>`;
@@ -332,7 +354,18 @@ function setKnockoutScore(t,r,m,h,a){
   if(match.next){ const nxt=ko.rounds[match.next.r]?.matches[match.next.m]; if(nxt){ nxt[match.next.slot]=winner; } }
   return true;
 }
-function resetKnockoutScore(t,r,m){ const ko=t.structure.knockout; const match=ko.rounds[r].matches[m]; match.scoreHome=match.scoreAway=null; match.played=false; }
+function resetKnockoutScore(t,r,m){
+  const ko=t.structure.knockout; const match=ko.rounds[r].matches[m];
+  // حاول نمسحو الفائز من الدور الموالي إذا كان متسجّل
+  if(match.played && match.next){
+    const prevWinner = (match.scoreHome > match.scoreAway) ? match.home : match.away;
+    const nxt = ko.rounds[match.next.r]?.matches[match.next.m];
+    if(nxt && ((nxt[match.next.slot]?.name || nxt[match.next.slot]) === (prevWinner?.name || prevWinner))) {
+      nxt[match.next.slot] = null;
+    }
+  }
+  match.scoreHome=match.scoreAway=null; match.played=false;
+}
 
 // Page wiring
 document.addEventListener('DOMContentLoaded', () => {
@@ -383,6 +416,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if(info){
     const t=findTournamentByURL();
     if(!t){ info.innerHTML='<p>Tournament not found.</p>'; return; }
+    // Migration للبطولات القديمة
+    const changed = migrateTournamentIfNeeded(t);
+    if(changed) saveTournament(t);
     if(t.format==='Group + Knockout') buildKnockoutFromGroups(t);
     renderTournament(t);
 
@@ -423,7 +459,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const frag=document.createDocumentFragment();
     TEAMS.forEach(t=>{
       const [c1,c2,c3]=(t.colors||[]).concat(['','','']).slice(0,3);
-      const card=document.createElement('div'); card.className='team-card';
+      const card=document.createElement('div');
+      card.className = (t.colors && t.colors.length >= 2) ? 'team-card striped' : 'team-card solid';
       if(c1) card.style.setProperty('--c1', c1);
       if(c2) card.style.setProperty('--c2', c2);
       if(c3) card.style.setProperty('--c3', c3);
